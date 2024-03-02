@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">DesafioPractico1</string>
+    <string name="title_activity_pago_liquido">PagoLiquido</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="title">Bienvenido</string>
+    <string name="buttonEcuacion">Ir a Ecuaciones</string>
+    <string name="buttonVotacion">Ir a Votaciones</string>
+    <string name="buttonPago">Ir a Pago Líquido</string>
+    <string name="name">Benjamín Alvarenga</string>
+    <string name="id">AV221218</string>
+
+    <!-- Ecuaciones view -->
+    <string name="titleEcuaciones">Calculadora de ecuaciones</string>
+    <string name="contentDescription">Ecuacion Cuadrática</string>
+    <string name="subtitleEcuaciones">Ingrese los datos para cada variable:</string>
+    <string name="a">a:</string>
+    <string name="b">b:</string>
+    <string name="c">c:</string>
+    <string name="resultEcuaciones">Resultado:</string>
+    <string name="buttonCalcular">Calcular</string>
+
+    <!-- Votacion vew -->
+    <string name="titleVotacion">Resultados de votaciones</string>
+    <string name="subtitleVotacion">Ingrese los votos: </string>
+    <string name="hint">Ej: 1, 2, 4, 3, 1, 1, 2...</string>
+    <string name="resultVotacion">Ver Resultados</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contentDescriptionVotacion">Icono</string>
+    <string name="resultText">Resultados:</string>
+</resources>
