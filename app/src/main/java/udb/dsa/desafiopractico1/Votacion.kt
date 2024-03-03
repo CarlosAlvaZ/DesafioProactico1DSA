@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import udb.dsa.desafiopractico1.fragments.Candidate
+import udb.dsa.desafiopractico1.fragments.CandidateAdapter
 
 class Votacion : AppCompatActivity() {
     lateinit var input: EditText
     lateinit var button: Button
+
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,41 +23,17 @@ class Votacion : AppCompatActivity() {
         input = findViewById(R.id.input)
         button = findViewById(R.id.buttonCalcular)
 
+        recyclerView = findViewById(R.id.recyclerViewVotacion)
+
         button.setOnClickListener { calculateVotes() }
     }
 
-    private fun getVotes(str: String): Pair<MutableMap<Int, Int>, Int> {
-        val tmp = mutableMapOf<Int, Int>()
-        var total = 0
+    private fun getVotes(str: String): Pair<Map<Int, Int>, Int> {
+        val tmp = str.split(",").mapNotNull { it.trim().toIntOrNull() }
 
-        // Extrayendo todas las cifras separadas por coma
-        val arr = str.split(",").toTypedArray<String>()
+        var total = tmp.size
 
-        for (d in arr) {
-            // Validando si el caracter es un entero
-            val aux = d.toIntOrNull()
-            when (aux) {
-                // Si no es un entero, se pasa al siguiente
-                null -> continue
-                // si es un entero, se valida si ya existe en el MutableMap
-                else -> {
-                    // si ya existe, se incrementa sus aparicions por 1
-                    if (tmp.containsKey(aux)) {
-                        val currentValue = tmp[aux]!!
-                        val newValue = currentValue + 1
-
-                        tmp[aux] = newValue
-                    } else {
-                        // si no existe aun, significa que es la primera aparicion de este elemento
-                        tmp[aux] = 1
-                    }
-                    // incrementing total by one
-                    total += 1
-                }
-            }
-        }
-
-        return Pair(tmp, total)
+        return Pair(tmp.groupingBy { it }.eachCount(), total)
     }
 
     private fun calculateVotes() {
@@ -67,21 +47,28 @@ class Votacion : AppCompatActivity() {
             return
         }
 
-        val results = getVotes(string)
+        val (results, total) = getVotes(string)
 
-       // for (result in results.first){
-       //     print("${result.key}, ${result.value}")
-       // }
+        val candidateList = parseMapToCandidateList(results, total)
 
-       val fragmentManager = supportFragmentManager
-       val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        printResults(candidateList)
+    }
 
-        for (result in results.first) {
-            val p = result.value * 100f / results.second
-            val fragment = Candidate.newInstance(result.key, result.value, p)
-            fragmentTransaction.add(R.id.fragmentContainerViewVotacion, fragment)
+    private fun parseMapToCandidateList(map: Map<Int, Int>, total: Int): MutableList<Candidate> {
+        val list = mutableListOf<Candidate>()
+
+        for ((candidate, votes) in map) {
+            val perc = votes * 100f / total
+            val tmp = Candidate(candidate, votes, perc)
+            list.add(tmp)
         }
 
-        fragmentTransaction.commit()
+        return list
+    }
+
+    private fun printResults(list: MutableList<Candidate>) {
+        val adapter = CandidateAdapter(this, list)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
 }

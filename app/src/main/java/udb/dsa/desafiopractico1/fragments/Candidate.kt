@@ -1,56 +1,39 @@
 package udb.dsa.desafiopractico1.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import udb.dsa.desafiopractico1.R
 
-class Candidate : Fragment() {
-    private var candidate: Int? = null
-    private var votes: Int? = null
-    private var percentage: Float? = null
+data class Candidate(val name: Int, val votes: Int, val percentage: Float)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            candidate = it.getInt(CANDIDATE)
-            votes = it.getInt(VOTES)
-            percentage = it.getFloat(PERCENTAGE)
-        }
-    }
+class CandidateAdapter(context: Context, items: MutableList<Candidate>) : RecyclerView.Adapter<CandidateAdapter.ViewHolder>() {
+    val context = context
+    val items = items
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_candidate, container, false)
-        val name = view.findViewById<TextView>(R.id.candidateName)
-        val percentageText = view.findViewById<TextView>(R.id.percentage)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val nameText = view.findViewById<TextView>(R.id.candidateName)
         val votesText = view.findViewById<TextView>(R.id.votes)
-
-        name.text = "Candidato $candidate"
-        percentageText.text = "Porcentaje de votos: $percentage%"
-        votesText.text = "Votos: $votes"
-
-        return view
+        val percentTect =  view.findViewById<TextView>(R.id.percentage)
     }
 
-    companion object {
-        private const val CANDIDATE = "candidate"
-        private const val VOTES = "votes"
-        private const val PERCENTAGE = "percentage"
-        @JvmStatic
-        fun newInstance(candidate: Int, votes: Int, percentage: Float) =
-            Candidate().apply {
-                arguments = Bundle().apply {
-                    putInt(CANDIDATE, candidate)
-                    putInt(VOTES, votes)
-                    putFloat(PERCENTAGE, percentage)
-                }
-            }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidateAdapter.ViewHolder {
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.candidate_card, parent, false)
+
+        return CandidateAdapter.ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: CandidateAdapter.ViewHolder, position: Int) {
+        holder.nameText.text = "Candidato ${items.get(position).name} "
+        holder.votesText.text = "Votos: ${items.get(position).votes} "
+        holder.percentTect.text = "Porcentaje: ${items.get(position).percentage}% "
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
     }
 }
