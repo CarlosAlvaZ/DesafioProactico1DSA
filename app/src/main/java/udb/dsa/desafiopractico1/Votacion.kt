@@ -7,8 +7,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import udb.dsa.desafiopractico1.fragments.Candidate
-import udb.dsa.desafiopractico1.fragments.CandidateAdapter
+import udb.dsa.desafiopractico1.components.Candidate
+import udb.dsa.desafiopractico1.components.CandidateAdapter
 
 class Votacion : AppCompatActivity() {
     lateinit var input: EditText

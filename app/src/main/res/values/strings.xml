@@ -26,8 +26,22 @@
     <string name="subtitleVotacion">Ingrese los votos: </string>
     <string name="hint">Ej: 1, 2, 4, 3, 1, 1, 2...</string>
     <string name="resultVotacion">Ver Resultados</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Pago Liquido view -->
     <string name="contentDescriptionVotacion">Icono</string>
     <string name="resultText">Resultados:</string>
+    <string name="contentDescriptionPagoLIquido">Añadir empleado</string>
+    <string name="modalTitle">Añadir un nuevo empleado</string>
+    <string name="nameHint">Nombre</string>
+    <string name="apellidoHint">Apellido</string>
+    <string name="cargoHint">Cargo</string>
+    <string name="horasHint">Horas trabajadas</string>
+    <string name="addNewEmpleadoButton">Añadir</string>
+    <string name="nombreEmpleado">Nombre:</string>
+    <string name="rolEmpleado">Rol:</string>
+    <string name="descuento_iss">Descuento ISS:</string>
+    <string name="descuento_afp">Descuento AFP:</string>
+    <string name="descuento_renta">Descuento Renta:</string>
+    <string name="sueldo_liquido">Sueldo Liquido:</string>
+
 </resources>

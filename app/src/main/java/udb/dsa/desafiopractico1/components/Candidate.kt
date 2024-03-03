@@ -1,4 +1,4 @@
-package udb.dsa.desafiopractico1.fragments
+package udb.dsa.desafiopractico1.components
 
 import android.content.Context
 import android.view.LayoutInflater
