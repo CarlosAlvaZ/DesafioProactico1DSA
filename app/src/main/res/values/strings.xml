@@ -44,4 +44,15 @@
     <string name="descuento_renta">Descuento Renta:</string>
     <string name="sueldo_liquido">Sueldo Liquido:</string>
 
+    <string name="signup">SignUp</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repeatPassword">Repetir Contraseña</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="loginHook">¿Ya tienes una cuenta?, Iniciar Sesión</string>
+    <string name="signupHook">Crear cuenta</string>
+    <string name="loginTitle">Log In</string>
+    <string name="log_out">Log out</string>
+    <string name="log_in">Log In</string>
+
 </resources>
